@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1wqpftb8betn"]
+
+[ext_resource type="Script" path="res://GameComponents/Interactions/interact_area.gd" id="1_sn836"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cmcj1"]
+
+[node name="InteractArea" type="Area2D"]
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_sn836")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(2.02645, 2.02645)
+shape = SubResource("CircleShape2D_cmcj1")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
