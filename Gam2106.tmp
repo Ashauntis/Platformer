@@ -1,0 +1,50 @@
+[gd_scene load_steps=9 format=3 uid="uid://es5lrybcos7n"]
+
+[ext_resource type="Script" path="res://Game.gd" id="1_dbfy2"]
+[ext_resource type="PackedScene" uid="uid://rssbspsbklek" path="res://GameComponents/characters/Player/Player.tscn" id="1_w0piw"]
+[ext_resource type="PackedScene" uid="uid://f8kmcrj4p0m0" path="res://GameComponents/Decorations/Treasure Chest/TreasureChest.tscn" id="3_g37ar"]
+[ext_resource type="PackedScene" uid="uid://b1wqpftb8betn" path="res://GameComponents/Interactions/interact_area.tscn" id="4_tp0gi"]
+[ext_resource type="Script" path="res://GameComponents/Scenes/BackgroundScripted/Map.gd" id="5_gi7b8"]
+[ext_resource type="TileSet" uid="uid://ccms7i1wqeikd" path="res://Assets/Resources/grassybiome.tres" id="5_hwnv6"]
+[ext_resource type="PackedScene" uid="uid://2m55gue3bux6" path="res://GameComponents/Scenes/BackgroundScripted/Sprite2D_background.tscn" id="6_p07wo"]
+[ext_resource type="PackedScene" uid="uid://4j8j6mchghiw" path="res://GameComponents/characters/Enemies/Rabbit/rabbit.tscn" id="8_480el"]
+
+[node name="Game" type="Node2D" groups=["AudioHandler"]]
+script = ExtResource("1_dbfy2")
+
+[node name="Player" parent="." node_paths=PackedStringArray("animPlayer", "sprite", "interactLabel") instance=ExtResource("1_w0piw")]
+position = Vector2(145, 537)
+scale = Vector2(2, 2)
+SPEED = 300
+JUMP_VELOCITY = -300
+animPlayer = NodePath("")
+sprite = NodePath("")
+interactLabel = NodePath("")
+
+[node name="TreasureChest" parent="." instance=ExtResource("3_g37ar")]
+position = Vector2(1135, 550)
+scale = Vector2(0.144741, 0.144741)
+
+[node name="InteractArea" parent="." instance=ExtResource("4_tp0gi")]
+position = Vector2(525, 547)
+interact_label = "Interaction Test"
+interact_type = "test"
+interact_value = "Success!"
+
+[node name="Map" type="Node2D" parent="." node_paths=PackedStringArray("bg", "tilemap")]
+script = ExtResource("5_gi7b8")
+bg = NodePath("NewBackground1920x1080")
+tilemap = NodePath("TileMap")
+
+[node name="NewBackground1920x1080" parent="Map" instance=ExtResource("6_p07wo")]
+script = null
+
+[node name="TileMap" type="TileMap" parent="Map"]
+position = Vector2(896, 568)
+tile_set = ExtResource("5_hwnv6")
+format = 2
+layer_0/name = "Map"
+layer_0/tile_data = PackedInt32Array(65529, 22, 0, 65530, 23, 0, 65531, 23, 0, 65532, 23, 0, 65533, 24, 0, 262141, 7, 0, 196605, 4, 0, 131069, 2, 0, 262137, 6, 0, 196601, 5, 0, 131065, 2, 0, 262138, 3, 0, 262139, 3, 0, 262140, 3, 0, 196602, 2, 0, 131067, 2, 0, 196603, 2, 0, 131068, 2, 0, 196604, 2, 0, 131066, 2, 0, 131070, 23, 0, 131071, 21, 0, 0, 13, 0, 65536, 12, 0, 1, 17, 0, 3, 15, 0, 2, 19, 0, 65539, 14, 0, 65540, 15, 0, 131077, 15, 0, 196614, 16, 0, 196615, 16, 0, 131076, 14, 0, 196613, 14, 0, 65537, 2, 0, 65538, 2, 0, 196606, 2, 0, 131073, 2, 0, 131072, 2, 0, 196607, 2, 0, 131074, 2, 0, 131075, 2, 0, 262142, 3, 0, 262143, 3, 0, 196608, 3, 0, 196609, 3, 0, 196610, 3, 0, 196611, 3, 0, 196612, 3, 0)
+
+[node name="Rabbit" parent="." instance=ExtResource("8_480el")]
+position = Vector2(314, 551)

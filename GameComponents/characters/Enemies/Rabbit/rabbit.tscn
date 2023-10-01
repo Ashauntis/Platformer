@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://4j8j6mchghiw"]
+
+[ext_resource type="Script" path="res://GameComponents/characters/Enemies/Rabbit/rabbit.gd" id="1_ein33"]
+[ext_resource type="SpriteFrames" uid="uid://c74faxve4qao7" path="res://Assets/Other Stuff/2D Sprites Characters/Updated Rabbit/RabbitAnim.tres" id="2_slvgk"]
+[ext_resource type="PackedScene" uid="uid://c2j13rlvfwmxa" path="res://GameComponents/characters/State/StateMachine.tscn" id="3_vw3td"]
+[ext_resource type="Script" path="res://GameComponents/characters/Enemies/Rabbit/Patrol.gd" id="4_3r6ip"]
+[ext_resource type="Script" path="res://GameComponents/characters/Enemies/Rabbit/Label.gd" id="5_bimtw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ny8q8"]
+radius = 9.0
+
+[node name="Rabbit" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 5
+script = ExtResource("1_ein33")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("2_slvgk")
+animation = &"MoveRight"
+autoplay = "IdleRight"
+frame_progress = 0.986248
+
+[node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state", "entity", "label") instance=ExtResource("3_vw3td")]
+initial_state = NodePath("Patrol")
+entity = NodePath("..")
+label = NodePath("../Label")
+
+[node name="Patrol" type="Node" parent="StateMachine"]
+script = ExtResource("4_3r6ip")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 9)
+shape = SubResource("CircleShape2D_ny8q8")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = -137.0
+offset_top = -26.0
+offset_right = 138.0
+text = "Label"
+horizontal_alignment = 1
+script = ExtResource("5_bimtw")

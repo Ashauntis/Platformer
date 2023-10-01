@@ -1,0 +1,74 @@
+[gd_scene load_steps=11 format=3 uid="uid://f8kmcrj4p0m0"]
+
+[ext_resource type="Texture2D" uid="uid://d10lrgd853xdg" path="res://GameComponents/Decorations/Treasure Chest/png/Separate/1x/1-1x.png" id="1_08ml6"]
+[ext_resource type="Texture2D" uid="uid://dstosypbnth0s" path="res://GameComponents/Decorations/Treasure Chest/png/Separate/1x/2-1x.png" id="2_crteo"]
+[ext_resource type="Texture2D" uid="uid://dyrh0iqvfta4l" path="res://GameComponents/Decorations/Treasure Chest/png/Separate/1x/3-1x.png" id="3_72dlo"]
+[ext_resource type="Texture2D" uid="uid://dmmtsarv4gfih" path="res://GameComponents/Decorations/Treasure Chest/png/Separate/1x/4-1x.png" id="4_ng0rr"]
+[ext_resource type="Texture2D" uid="uid://cmmmhgp6bqpl" path="res://GameComponents/Decorations/Treasure Chest/png/Separate/1x/5-1x.png" id="5_trj33"]
+[ext_resource type="Texture2D" uid="uid://7m7dmij541im" path="res://GameComponents/Decorations/Treasure Chest/png/Separate/1x/6-1x.png" id="6_nn110"]
+[ext_resource type="AudioStream" uid="uid://d26iq35pgl7n1" path="res://Assets/Audio/squeaky-door-open-113212.mp3" id="8_ql77g"]
+[ext_resource type="PackedScene" uid="uid://b1wqpftb8betn" path="res://GameComponents/Interactions/interact_area.tscn" id="8_rklg5"]
+
+[sub_resource type="GDScript" id="GDScript_ltyaf"]
+script/source = "extends Node2D
+
+@onready var sprite = $AnimatedSprite2D
+@onready var audio = $AudioStreamPlayer
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta):
+	pass
+"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4thao"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_08ml6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_crteo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_72dlo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ng0rr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_trj33")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_nn110")
+}],
+"loop": false,
+"name": &"openChest",
+"speed": 12.0
+}]
+
+[node name="TreasureChest" type="Node2D"]
+script = SubResource("GDScript_ltyaf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_4thao")
+animation = &"openChest"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_ql77g")
+
+[node name="InteractArea" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("8_rklg5")]
+visible = false
+position = Vector2(0, 60)
+scale = Vector2(4.45095, 4.45095)
+interact_label = "Treasure Chest"
+interact_type = "open"
+interact_value = "20 Gold"
+sprite = NodePath("../AnimatedSprite2D")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_ql77g")
