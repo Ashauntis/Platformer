@@ -1,4 +1,4 @@
-[gd_scene load_steps=235 format=3 uid="uid://rssbspsbklek"]
+[gd_scene load_steps=236 format=3 uid="uid://rssbspsbklek"]
 
 [ext_resource type="Script" path="res://GameComponents/characters/Player/Player.gd" id="1_oetmt"]
 [ext_resource type="Texture2D" uid="uid://c2bmcsqd4ht2e" path="res://GameComponents/characters/Player/Sprite Sheets/player air spin 48x48.png" id="2_i74p6"]
@@ -34,6 +34,7 @@
 [ext_resource type="Script" path="res://GameComponents/characters/Player/States/Run.gd" id="32_ou0en"]
 [ext_resource type="Script" path="res://GameComponents/characters/InteractionArea.gd" id="33_j5hnm"]
 [ext_resource type="Script" path="res://GameComponents/characters/Player/States/Jump.gd" id="33_qqofl"]
+[ext_resource type="Script" path="res://GameComponents/characters/Player/States/Falling.gd" id="34_hjvtg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_na6ws"]
 atlas = ExtResource("2_i74p6")
@@ -1607,15 +1608,6 @@ initial_state = NodePath("Idle")
 entity = NodePath("..")
 label = NodePath("Label")
 
-[node name="Idle" type="Node" parent="StateMachine"]
-script = ExtResource("31_pwgim")
-
-[node name="Run" type="Node" parent="StateMachine"]
-script = ExtResource("32_ou0en")
-
-[node name="Jump" type="Node" parent="StateMachine"]
-script = ExtResource("33_qqofl")
-
 [node name="Label" type="Label" parent="StateMachine"]
 offset_left = -17.0
 offset_top = -33.0
@@ -1625,6 +1617,26 @@ scale = Vector2(0.373119, 0.373119)
 text = "Initial State
 "
 horizontal_alignment = 1
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("aSprite", "target")]
+script = ExtResource("31_pwgim")
+aSprite = NodePath("../../AnimatedSprite2D")
+target = NodePath("../..")
+
+[node name="Run" type="Node" parent="StateMachine" node_paths=PackedStringArray("aSprite", "target")]
+script = ExtResource("32_ou0en")
+aSprite = NodePath("../../AnimatedSprite2D")
+target = NodePath("../..")
+
+[node name="Jump" type="Node" parent="StateMachine" node_paths=PackedStringArray("aSprite", "target")]
+script = ExtResource("33_qqofl")
+aSprite = NodePath("../../AnimatedSprite2D")
+target = NodePath("../..")
+
+[node name="Falling" type="Node" parent="StateMachine" node_paths=PackedStringArray("aSprite", "target")]
+script = ExtResource("34_hjvtg")
+aSprite = NodePath("../../AnimatedSprite2D")
+target = NodePath("../..")
 
 [node name="InteractionArea" type="Area2D" parent="." node_paths=PackedStringArray("listener")]
 collision_layer = 0
