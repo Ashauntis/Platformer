@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cde18ir3w4a4m"
-path="res://.godot/imported/player shoot 2H 48x48.png-25a4028dabbc0a5bce01439af0064114.ctex"
+uid="uid://b78yjwewbwokt"
+path="res://.godot/imported/Player Running Shooting 48x48.png-0cb0776554f9b9909ee3c3e100d043e5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GameComponents/characters/Player/Sprite Sheets/player shoot 2H 48x48.png"
-dest_files=["res://.godot/imported/player shoot 2H 48x48.png-25a4028dabbc0a5bce01439af0064114.ctex"]
+source_file="res://GameComponents/characters/Player/Sprite Sheets/Player Running Shooting 48x48.png"
+dest_files=["res://.godot/imported/Player Running Shooting 48x48.png-0cb0776554f9b9909ee3c3e100d043e5.ctex"]
 
 [params]
 

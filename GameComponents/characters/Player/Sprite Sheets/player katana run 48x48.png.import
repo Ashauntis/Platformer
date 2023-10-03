@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cde18ir3w4a4m"
-path="res://.godot/imported/player shoot 2H 48x48.png-25a4028dabbc0a5bce01439af0064114.ctex"
+uid="uid://c6s7qx8qu4rxu"
+path="res://.godot/imported/player katana run 48x48.png-66da4615705e0e5777e8859611da5e53.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GameComponents/characters/Player/Sprite Sheets/player shoot 2H 48x48.png"
-dest_files=["res://.godot/imported/player shoot 2H 48x48.png-25a4028dabbc0a5bce01439af0064114.ctex"]
+source_file="res://GameComponents/characters/Player/Sprite Sheets/player katana run 48x48.png"
+dest_files=["res://.godot/imported/player katana run 48x48.png-66da4615705e0e5777e8859611da5e53.ctex"]
 
 [params]
 

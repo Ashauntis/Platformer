@@ -1,4 +1,4 @@
-[gd_scene load_steps=236 format=3 uid="uid://rssbspsbklek"]
+[gd_scene load_steps=237 format=3 uid="uid://rssbspsbklek"]
 
 [ext_resource type="Script" path="res://GameComponents/characters/Player/Player.gd" id="1_oetmt"]
 [ext_resource type="Texture2D" uid="uid://c2bmcsqd4ht2e" path="res://GameComponents/characters/Player/Sprite Sheets/player air spin 48x48.png" id="2_i74p6"]
@@ -15,12 +15,12 @@
 [ext_resource type="Texture2D" uid="uid://cdy0ebkboq2it" path="res://GameComponents/characters/Player/Sprite Sheets/player ledge climb 48x48.png" id="13_1x0np"]
 [ext_resource type="Texture2D" uid="uid://g55wxqwyb1g6" path="res://GameComponents/characters/Player/Sprite Sheets/Player Pull 48x48.png" id="14_rpf71"]
 [ext_resource type="Texture2D" uid="uid://bf2iru7wvgwny" path="res://GameComponents/characters/Player/Sprite Sheets/Player Punch 64x64.png" id="15_wmso4"]
-[ext_resource type="Texture2D" uid="uid://b2bp0jcvvuadf" path="res://GameComponents/characters/Player/Sprite Sheets/Player Punch Cross 64x64.png" id="16_d4h0x"]
+[ext_resource type="Texture2D" uid="uid://s7xe36te7alf" path="res://GameComponents/characters/Player/Sprite Sheets/Player Punch Cross 64x64.png" id="16_d4h0x"]
 [ext_resource type="Texture2D" uid="uid://kiylx2hpqldv" path="res://GameComponents/characters/Player/Sprite Sheets/player push 48x48.png" id="17_h21d8"]
 [ext_resource type="Texture2D" uid="uid://c6s23i40asmlv" path="res://GameComponents/characters/Player/Sprite Sheets/player push idle 48x48.png" id="18_0wcgi"]
 [ext_resource type="Texture2D" uid="uid://cn2lj4snbi2kg" path="res://GameComponents/characters/Player/Sprite Sheets/Player Roll 48x48.png" id="19_7bmof"]
 [ext_resource type="Texture2D" uid="uid://bk73bk6kqogag" path="res://GameComponents/characters/Player/Sprite Sheets/run cycle 48x48.png" id="20_sokm7"]
-[ext_resource type="Texture2D" uid="uid://c0ob0aqikdrku" path="res://GameComponents/characters/Player/Sprite Sheets/player shoot 2H 48x48.png" id="21_3m35f"]
+[ext_resource type="Texture2D" uid="uid://cde18ir3w4a4m" path="res://GameComponents/characters/Player/Sprite Sheets/player shoot 2H 48x48.png" id="21_3m35f"]
 [ext_resource type="Texture2D" uid="uid://bajhi8y2angv2" path="res://GameComponents/characters/Player/Sprite Sheets/player sword atk 64x64.png" id="22_kksvk"]
 [ext_resource type="Texture2D" uid="uid://px6isbpn1hma" path="res://GameComponents/characters/Player/Sprite Sheets/Player Sword Idle 48x48.png" id="23_jfswe"]
 [ext_resource type="Texture2D" uid="uid://c67deqxclqtnq" path="res://GameComponents/characters/Player/Sprite Sheets/Player Sword Run 48x48.png" id="24_mcn4r"]
@@ -211,6 +211,10 @@ region = Rect2(512, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_2gx31"]
 atlas = ExtResource("7_bvu8v")
 region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h1ikp"]
+atlas = ExtResource("11_ox5hg")
+region = Rect2(96, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p068h"]
 atlas = ExtResource("8_2aoxi")
@@ -990,6 +994,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_h1ikp")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_p068h")
 }, {
 "duration": 1.0,
@@ -1606,17 +1618,7 @@ horizontal_alignment = 1
 [node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state", "entity", "label") instance=ExtResource("30_p23h1")]
 initial_state = NodePath("Idle")
 entity = NodePath("..")
-label = NodePath("Label")
-
-[node name="Label" type="Label" parent="StateMachine"]
-offset_left = -17.0
-offset_top = -33.0
-offset_right = 72.0
-offset_bottom = -7.0
-scale = Vector2(0.373119, 0.373119)
-text = "Initial State
-"
-horizontal_alignment = 1
+label = NodePath("../Label")
 
 [node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("aSprite", "target")]
 script = ExtResource("31_pwgim")
@@ -1662,6 +1664,16 @@ text = "Interaction
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="."]
+offset_left = -17.0
+offset_top = -33.0
+offset_right = 72.0
+offset_bottom = -7.0
+scale = Vector2(0.373119, 0.373119)
+text = "Initial State
+"
+horizontal_alignment = 1
 
 [connection signal="area_entered" from="InteractionArea" to="." method="_on_interaction_area_area_entered"]
 [connection signal="area_exited" from="InteractionArea" to="." method="_on_interaction_area_area_exited"]

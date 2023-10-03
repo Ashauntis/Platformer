@@ -7,6 +7,8 @@ func Enter():
 	entity.sprite.play("idle")
 	
 func Update(_delta: float):
+	if !entity.is_on_floor():
+		Transitioned.emit(self, "falling")
 	# Handle jump
 	if Input.is_action_just_pressed("jump") and entity.is_on_floor():
 		Transitioned.emit(self, "jump")
