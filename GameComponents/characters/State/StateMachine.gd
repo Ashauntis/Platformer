@@ -46,3 +46,6 @@ func on_child_transition(state, new_state_name):
 	
 	current_state = new_state	
 	new_state.Enter() 
+
+func death():
+	on_child_transition(current_state, "death")

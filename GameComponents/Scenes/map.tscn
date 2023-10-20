@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://byy6lec8c88xn"]
-
-[ext_resource type="Script" path="res://GameComponents/Scenes/BackgroundScripted/Map.gd" id="1_5gaot"]
-
-[node name="Map" type="Node2D" node_paths=PackedStringArray("bg", "tilemap")]
-script = ExtResource("1_5gaot")
-bg = NodePath("")
-tilemap = NodePath("")

@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://4j8j6mchghiw"]
 
 [ext_resource type="Script" path="res://GameComponents/characters/Enemies/Rabbit/rabbit.gd" id="1_ein33"]
-[ext_resource type="SpriteFrames" uid="uid://c74faxve4qao7" path="res://Assets/Other Stuff/2D Sprites Characters/Updated Rabbit/RabbitAnim.tres" id="2_slvgk"]
+[ext_resource type="SpriteFrames" uid="uid://c74faxve4qao7" path="res://GameComponents/characters/Enemies/Rabbit/Updated Rabbit/RabbitAnim.tres" id="2_slvgk"]
 [ext_resource type="PackedScene" uid="uid://c2j13rlvfwmxa" path="res://GameComponents/characters/State/StateMachine.tscn" id="3_vw3td"]
 [ext_resource type="Script" path="res://GameComponents/characters/Enemies/Rabbit/Patrol.gd" id="4_3r6ip"]
 [ext_resource type="Script" path="res://GameComponents/characters/Enemies/Rabbit/Label.gd" id="5_bimtw"]

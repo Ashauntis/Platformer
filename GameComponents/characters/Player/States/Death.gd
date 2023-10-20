@@ -1,23 +1,19 @@
 extends State
-class_name CharacterJump
+class_name CharacterDeath
 
 @onready var globals = get_node("/root/WorldVariables")
 
 @onready var entity = get_parent().entity
 
 func Enter():
-	flip_sprite()
-	entity.sprite.play("jump")
-	jump()
+	print('Playing death animation')
+	entity.sprite.play("death")
 	
 func Update(_delta: float):
-	if entity.velocity.y < 0:
-		Transitioned.emit(self, "falling")
+	pass
 
 func Exit(): 
 	pass
 
 func Physics_Update(_delta: float):
-	if entity.dirx:
-		flip_sprite()
-		move_x()
+	pass

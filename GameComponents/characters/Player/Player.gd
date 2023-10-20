@@ -1,8 +1,11 @@
 extends CharacterBody2D
 
+@onready var globals = get_node("/root/WorldVariables")
+
 @export var SPEED: int = 300
 @export var JUMP_VELOCITY: int = -300
 @export var state: StateMachine
+@export var health: Health
 
 @export var sprite: AnimatedSprite2D
 
@@ -16,6 +19,15 @@ signal interaction_occured(label, type, value)
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+
+func _ready():
+	#globals.max_health = max_health
+	# defer setting this value so the UI has a chance to connect to our signal first
+	#set_deferred("health", max_health)
+	pass
+	
+func _process(_float) -> void:
+	pass
 	
 func _physics_process(delta):
 	# include any not-state specific physics instructions

@@ -9,9 +9,9 @@ extends Node2D
 func _ready():
 	var bgscale = bg.get_scale()
 	var height = bg.texture.get_height() * bgscale.y
-	print('height ', height)
+	#print('height ', height)
 	var width = bg.texture.get_width() * bgscale.x
-	print('width ', width)
+	#print('width ', width)
 	
 	globals.update_boundaries(height, width)
 

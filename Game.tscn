@@ -1,14 +1,14 @@
 [gd_scene load_steps=17 format=3 uid="uid://es5lrybcos7n"]
 
 [ext_resource type="Script" path="res://Game.gd" id="1_dbfy2"]
-[ext_resource type="PackedScene" uid="uid://rssbspsbklek" path="res://GameComponents/characters/Player/States/Player.tscn" id="1_w0piw"]
+[ext_resource type="PackedScene" uid="uid://rssbspsbklek" path="res://GameComponents/characters/Player/Player.tscn" id="1_w0piw"]
 [ext_resource type="PackedScene" uid="uid://f8kmcrj4p0m0" path="res://GameComponents/Decorations/Treasure Chest/TreasureChest.tscn" id="3_g37ar"]
 [ext_resource type="PackedScene" uid="uid://b1wqpftb8betn" path="res://GameComponents/Interactions/interact_area.tscn" id="4_tp0gi"]
-[ext_resource type="PackedScene" uid="uid://byy6lec8c88xn" path="res://GameComponents/Scenes/map.tscn" id="5_f8wcd"]
-[ext_resource type="PackedScene" uid="uid://2m55gue3bux6" path="res://GameComponents/Scenes/BackgroundScripted/Sprite2D_background.tscn" id="6_p07wo"]
-[ext_resource type="Texture2D" uid="uid://dtvnbac7tisnr" path="res://Assets/Kenny/kenney_platformer-art-deluxe/Base pack/bg.png" id="7_wo81w"]
+[ext_resource type="PackedScene" uid="uid://bnywmmordscx3" path="res://GameComponents/Scenes/Map/map.tscn" id="5_f8wcd"]
+[ext_resource type="Texture2D" uid="uid://dtvnbac7tisnr" path="res://Assets/Kenny/kenney_platformer-art-deluxe/Base pack/bg.png" id="7_0ibmv"]
 [ext_resource type="Texture2D" uid="uid://cpw7emootdy8g" path="res://Assets/Kenny/kenney_platformer-art-deluxe/Base pack/Vector/tiles.svg" id="8_4vtha"]
 [ext_resource type="PackedScene" uid="uid://4j8j6mchghiw" path="res://GameComponents/characters/Enemies/Rabbit/rabbit.tscn" id="8_480el"]
+[ext_resource type="PackedScene" uid="uid://fbff4hwg6e8c" path="res://GameComponents/Scenes/UI/ui.tscn" id="9_6yo2u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_psm0j"]
 resource_name = "Main"
@@ -98,7 +98,7 @@ use_texture_padding = false
 4:0/0 = 0
 4:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 4:0/0/physics_layer_0/angular_velocity = 0.0
-4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-35, -28, -29, -35, 35, -35, 35, 35, 6.5, 30.5, -12.5, 23, -27.5, 11, -35, -1.5)
+4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-35, -35, 35, -35, 35, 35, -35, 35)
 5:0/0 = 0
 5:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 5:0/0/physics_layer_0/angular_velocity = 0.0
@@ -116,6 +116,7 @@ use_texture_padding = false
 9:0/0 = 0
 9:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 9:0/0/physics_layer_0/angular_velocity = 0.0
+9:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-35, -35, 35, -35, 35, 35, -35, 35)
 2:1/0 = 0
 2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:1/0/physics_layer_0/angular_velocity = 0.0
@@ -340,6 +341,7 @@ use_texture_padding = false
 10:0/0 = 0
 10:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 10:0/0/physics_layer_0/angular_velocity = 0.0
+10:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-35, -6.5, -16.5, -1.5, 19.5, -11, 35, -8, 35, 35, -35, 35)
 11:0/0 = 0
 11:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 11:0/0/physics_layer_0/angular_velocity = 0.0
@@ -808,31 +810,14 @@ point_count = 2
 [node name="Game" type="Node2D" groups=["AudioHandler"]]
 script = ExtResource("1_dbfy2")
 
-[node name="TreasureChest" parent="." instance=ExtResource("3_g37ar")]
-position = Vector2(285, 542)
-scale = Vector2(0.144741, 0.144741)
-
-[node name="InteractArea" parent="." instance=ExtResource("4_tp0gi")]
-position = Vector2(525, 547)
-interact_label = "Interaction Test"
-interact_type = "test"
-interact_value = "Success!"
-
-[node name="Player" parent="." instance=ExtResource("1_w0piw")]
-position = Vector2(144, 535)
-scale = Vector2(2, 2)
-
 [node name="Map" parent="." node_paths=PackedStringArray("bg", "tilemap") instance=ExtResource("5_f8wcd")]
-z_index = -1
-bg = NodePath("Background")
+bg = NodePath("Sprite2D")
 tilemap = NodePath("TileMap")
 
-[node name="Background" parent="Map" instance=ExtResource("6_p07wo")]
-position = Vector2(960, 541)
+[node name="Sprite2D" type="Sprite2D" parent="Map"]
+position = Vector2(960, 540)
 scale = Vector2(7.5, 4.21875)
-texture = ExtResource("7_wo81w")
-offset = Vector2(0, 0)
-script = null
+texture = ExtResource("7_0ibmv")
 
 [node name="TileMap" type="TileMap" parent="Map"]
 tile_set = SubResource("TileSet_utajy")
@@ -840,14 +825,15 @@ cell_quadrant_size = 72
 collision_animatable = true
 format = 2
 layer_0/name = "Map"
-layer_0/tile_data = PackedInt32Array(524288, 65537, 0, 524289, 131073, 0, 524290, 131073, 0, 524291, 131073, 0, 524292, 131073, 0, 524293, 131073, 0, 589824, 65537, 1, 589825, 65537, 1, 589826, 65537, 1, 589827, 65537, 1, 589828, 65537, 1, 589829, 65537, 1, 524294, 327681, 0, 589831, 327681, 0, 589830, 327681, 1, 655367, 327681, 1, 655368, 131073, 1, 655371, 393217, 1, 589836, 393217, 1, 589835, 393217, 0, 524300, 393217, 0, 524301, 131073, 0, 524302, 131073, 0, 524303, 131073, 0, 524304, 131073, 0, 524305, 131073, 0, 524306, 131073, 0, 655370, 1, 1, 655360, 65537, 1, 655361, 65537, 1, 655362, 65537, 1, 655363, 65537, 1, 655364, 65537, 1, 655366, 65537, 1, 655365, 65537, 1, 524307, 131073, 0, 524308, 131073, 0, 524309, 131073, 0, 524310, 131073, 0, 524311, 131073, 0, 524312, 131073, 0, 524313, 131073, 0, 524314, 131073, 0, 524315, 131073, 0)
+layer_0/z_index = 1
+layer_0/tile_data = PackedInt32Array(524288, 65537, 0, 524289, 131073, 0, 524290, 131073, 0, 524291, 131073, 0, 524292, 131073, 0, 524293, 131073, 0, 589824, 65537, 1, 589825, 65537, 1, 589826, 65537, 1, 589827, 65537, 1, 589828, 65537, 1, 589829, 65537, 1, 524294, 327681, 0, 589831, 327681, 0, 589830, 327681, 1, 655367, 327681, 1, 589836, 393217, 1, 589835, 393217, 0, 524300, 393217, 0, 524301, 131073, 0, 524302, 131073, 0, 524303, 131073, 0, 524304, 131073, 0, 524305, 131073, 0, 524306, 131073, 0, 655370, 1, 1, 655360, 65537, 1, 655361, 65537, 1, 655362, 65537, 1, 655363, 65537, 1, 655364, 65537, 1, 655366, 65537, 1, 655365, 65537, 1, 524307, 131073, 0, 524308, 131073, 0, 524309, 131073, 0, 524310, 131073, 0, 524311, 131073, 0, 524312, 131073, 0, 524313, 131073, 0, 524314, 131073, 0, 524315, 131073, 0, 655368, 131073, 1, 655371, 393217, 1)
 layer_1/name = "Background"
 layer_1/enabled = true
 layer_1/modulate = Color(1, 1, 1, 1)
 layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
-layer_1/z_index = -1
-layer_1/tile_data = PackedInt32Array(655368, 589825, 0, 655369, 589825, 0, 655370, 589825, 0)
+layer_1/z_index = 0
+layer_1/tile_data = PackedInt32Array(655369, 655361, 0, 655368, 655361, 0, 655370, 655361, 0)
 
 [node name="Left Boundary" type="StaticBody2D" parent="Map"]
 collision_mask = 0
@@ -874,6 +860,20 @@ shape = SubResource("RectangleShape2D_owwtv")
 position = Vector2(960, 1080)
 shape = SubResource("RectangleShape2D_owwtv")
 
+[node name="TreasureChest" parent="." instance=ExtResource("3_g37ar")]
+position = Vector2(285, 542)
+scale = Vector2(0.144741, 0.144741)
+
+[node name="InteractArea" parent="." instance=ExtResource("4_tp0gi")]
+position = Vector2(358, 540)
+interact_label = "Interaction Test"
+interact_type = "test"
+interact_value = "Success!"
+
+[node name="Player" parent="." instance=ExtResource("1_w0piw")]
+position = Vector2(143, 528)
+scale = Vector2(2, 2)
+
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2(1077, 544)
 scale = Vector2(1.00331, 1)
@@ -886,3 +886,6 @@ loop = false
 
 [node name="Rabbit" parent="Path2D/PathFollow2D" instance=ExtResource("8_480el")]
 rotation = 3.22013
+
+[node name="UI" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_6yo2u")]
+player = NodePath("../Player")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxo88ui47wv4g"
-path="res://.godot/imported/Player Jab 48x48.png-6b244903a200824afba3da5cdba90d5c.ctex"
+uid="uid://cdeeeoqv2w5k5"
+path="res://.godot/imported/Rabbit_Brown_Move.png-8fc261e11d696a3fb977fc736b9cc580.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GameComponents/characters/Player/Player Jab 48x48.png"
-dest_files=["res://.godot/imported/Player Jab 48x48.png-6b244903a200824afba3da5cdba90d5c.ctex"]
+source_file="res://GameComponents/characters/Enemies/Rabbit/Updated Rabbit/Rabbit_Brown_Move.png"
+dest_files=["res://.godot/imported/Rabbit_Brown_Move.png-8fc261e11d696a3fb977fc736b9cc580.ctex"]
 
 [params]
 

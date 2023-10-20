@@ -1,6 +1,6 @@
-extends TileMap
+extends CanvasLayer
 
-@onready var globals = get_node("/root/WorldVariables")
+@export var player: CharacterBody2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

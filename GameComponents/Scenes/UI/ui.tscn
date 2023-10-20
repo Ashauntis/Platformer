@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://fbff4hwg6e8c"]
+
+[ext_resource type="Script" path="res://GameComponents/Scenes/UI/ui.gd" id="1_ap0dh"]
+[ext_resource type="Texture2D" uid="uid://dbobt8q4qjue6" path="res://Assets/Kenny/kenney_ui-pack/PNG/red_button10.png" id="2_0fid8"]
+[ext_resource type="Texture2D" uid="uid://3xyaktbi1c71" path="res://Assets/Kenny/kenney_ui-pack/PNG/red_button13.png" id="3_22cjm"]
+[ext_resource type="Script" path="res://GameComponents/Scenes/UI/HealthBar.gd" id="4_voltm"]
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_ap0dh")
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+offset_left = 9.0
+offset_top = 8.0
+offset_right = 199.0
+offset_bottom = 57.0
+scale = Vector2(0.221558, 0.221558)
+texture_under = ExtResource("2_0fid8")
+texture_progress = ExtResource("3_22cjm")
+script = ExtResource("4_voltm")

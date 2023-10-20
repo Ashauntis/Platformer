@@ -1,4 +1,4 @@
-[gd_scene load_steps=237 format=3 uid="uid://rssbspsbklek"]
+[gd_scene load_steps=239 format=3 uid="uid://rssbspsbklek"]
 
 [ext_resource type="Script" path="res://GameComponents/characters/Player/Player.gd" id="1_oetmt"]
 [ext_resource type="Texture2D" uid="uid://c2bmcsqd4ht2e" path="res://GameComponents/characters/Player/Sprite Sheets/player air spin 48x48.png" id="2_i74p6"]
@@ -35,6 +35,8 @@
 [ext_resource type="Script" path="res://GameComponents/characters/InteractionArea.gd" id="33_j5hnm"]
 [ext_resource type="Script" path="res://GameComponents/characters/Player/States/Jump.gd" id="33_qqofl"]
 [ext_resource type="Script" path="res://GameComponents/characters/Player/States/Falling.gd" id="34_hjvtg"]
+[ext_resource type="Script" path="res://GameComponents/characters/Player/States/Death.gd" id="35_oeeme"]
+[ext_resource type="PackedScene" uid="uid://dn24sxxlepkx4" path="res://GameComponents/characters/Health/Health.tscn" id="37_50deo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_na6ws"]
 atlas = ExtResource("2_i74p6")
@@ -988,7 +990,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2gx31")
 }],
-"loop": true,
+"loop": false,
 "name": &"death",
 "speed": 8.0
 }, {
@@ -1565,60 +1567,45 @@ animations = [{
 "speed": 8.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k5fsw"]
-radius = 3.46593
-height = 29.4331
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n5yxs"]
+size = Vector2(12.0764, 26.8741)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vw8j6"]
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("state", "sprite", "interactLabel")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("state", "health", "sprite", "interactLabel")]
+position = Vector2(1, 0)
 floor_snap_length = 6.0
 script = ExtResource("1_oetmt")
 state = NodePath("StateMachine")
+health = NodePath("Health")
 sprite = NodePath("AnimatedSprite2D")
-interactLabel = NodePath("InteractionArea/InteractionLabel")
+interactLabel = NodePath("Control/VBoxContainer/InteractionLabel")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_vsw0t")
-animation = &"idle"
+animation = &"death"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, 1)
-scale = Vector2(-2.38647, 1.01926)
-shape = SubResource("CapsuleShape2D_k5fsw")
+position = Vector2(0, 1.82196)
+scale = Vector2(1.15929, -0.980725)
+shape = SubResource("RectangleShape2D_n5yxs")
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("label", "label2")]
-position = Vector2(0, -112)
-zoom = Vector2(0.25, 0.25)
+offset = Vector2(0, -100)
+zoom = Vector2(0.5, 0.5)
 position_smoothing_enabled = true
-position_smoothing_speed = 3.0
+position_smoothing_speed = 2.0
 script = ExtResource("29_yc1b0")
-label = NodePath("Camera Label (X, Y)")
-label2 = NodePath("Camera Label 2(X, Y)")
+label = NodePath("../Control/VBoxContainer/Camera Label (X, Y)")
+label2 = NodePath("../Control/VBoxContainer/Camera Label 2(X, Y)")
 
-[node name="Camera Label (X, Y)" type="Label" parent="Camera2D"]
-visible = false
-offset_left = -73.0
-offset_top = 66.0
-offset_right = 84.0
-offset_bottom = 89.0
-text = "Camera Label"
-horizontal_alignment = 1
-
-[node name="Camera Label 2(X, Y)" type="Label" parent="Camera2D"]
-visible = false
-offset_left = -73.0
-offset_top = 38.0
-offset_right = 84.0
-offset_bottom = 64.0
-text = "Camera Label 2"
-horizontal_alignment = 1
+[node name="Health" parent="." instance=ExtResource("37_50deo")]
+max_health = 10
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state", "entity", "label") instance=ExtResource("30_p23h1")]
 initial_state = NodePath("Idle")
 entity = NodePath("..")
-label = NodePath("../Label")
+label = NodePath("../Control/VBoxContainer/State")
 
 [node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("aSprite", "target")]
 script = ExtResource("31_pwgim")
@@ -1640,6 +1627,9 @@ script = ExtResource("34_hjvtg")
 aSprite = NodePath("../../AnimatedSprite2D")
 target = NodePath("../..")
 
+[node name="Death" type="Node" parent="StateMachine"]
+script = ExtResource("35_oeeme")
+
 [node name="InteractionArea" type="Area2D" parent="." node_paths=PackedStringArray("listener")]
 collision_layer = 0
 collision_mask = 2
@@ -1653,26 +1643,50 @@ position = Vector2(0, 1)
 scale = Vector2(2.04211, 2.04211)
 shape = SubResource("CircleShape2D_vw8j6")
 
-[node name="InteractionLabel" type="Label" parent="InteractionArea"]
-offset_left = -42.0
-offset_top = -23.0
-offset_right = 238.0
-offset_bottom = 3.0
-scale = Vector2(0.299061, 0.245544)
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -20.0
+offset_top = -55.0
+offset_right = 20.0
+offset_bottom = -15.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 2
+offset_left = 6.0
+offset_top = 10.0
+offset_right = 126.0
+offset_bottom = 126.0
+scale = Vector2(0.25, 0.25)
+alignment = 1
+
+[node name="State" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Initial State
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Camera Label (X, Y)" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Camera Label"
+horizontal_alignment = 1
+
+[node name="InteractionLabel" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Interaction
 "
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="."]
-offset_left = -17.0
-offset_top = -33.0
-offset_right = 72.0
-offset_bottom = -7.0
-scale = Vector2(0.373119, 0.373119)
-text = "Initial State
-"
+[node name="Camera Label 2(X, Y)" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Camera Label 2"
 horizontal_alignment = 1
 
 [connection signal="area_entered" from="InteractionArea" to="." method="_on_interaction_area_area_entered"]
